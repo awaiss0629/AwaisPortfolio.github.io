@@ -10,7 +10,7 @@
     * { box-sizing: border-box; }
     :root{
       --bg:#0b0f14;
-      --panel:#0f1320cc;          /* glassy panel */
+      --panel:#0f1320cc;
       --text:#eaf1ff;
       --muted:#9fb0c4;
       --accent:#00ffd5;
@@ -18,11 +18,11 @@
       --border:#1f2734;
       --radius:18px;
       --shadow:0 18px 50px rgba(0,0,0,.45);
-      --media-sm:260px;           /* bigger media on all screens */
-      --media-md:360px;
-      --media-lg:460px;
+      --mediaH-sm:340px;  /* equal media height on all cards */
+      --mediaH-md:420px;
+      --mediaH-lg:480px;
       --gutter:22px;
-      --container:1220px;         /* wider page */
+      --container:1220px;
     }
     html,body{height:100%}
     body{
@@ -39,7 +39,7 @@
     }
     .container{max-width:var(--container);margin:0 auto}
 
-    /* ----- Header / Hero ----- */
+    /* ----- Header ----- */
     header{position:relative;text-align:center;margin:0 0 44px}
     header::after{
       content:"";position:absolute;inset:auto 35% -16px 35%;
@@ -67,31 +67,33 @@
     /* ----- Project Grid ----- */
     .grid{
       display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); /* larger cards */
+      grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
       gap:var(--gutter);
     }
     .card{
-      position:relative;
-      background:var(--panel);
-      backdrop-filter: blur(10px);
-      border:1px solid var(--border);
-      border-radius:var(--radius);
-      overflow:hidden;
+      position:relative;background:var(--panel);backdrop-filter: blur(10px);
+      border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;
       box-shadow:var(--shadow);
       transition:transform .25s ease, border-color .25s ease, box-shadow .25s ease;
       isolation:isolate;
     }
     .card::before{
-      /* subtle neon edge */
       content:"";position:absolute;inset:0;border-radius:inherit;
       background:linear-gradient(135deg, rgba(0,255,213,.14), rgba(124,243,255,.06) 40%, transparent 60%);
-      pointer-events:none;
-      mix-blend-mode:overlay;
+      pointer-events:none;mix-blend-mode:overlay;
     }
     .card:hover{transform:translateY(-6px);border-color:rgba(0,255,213,.35)}
-    .media{
-      display:block;width:100%;height:var(--media-sm);
-      object-fit:cover;background:#0b0d12;border-bottom:1px solid var(--border);
+
+    /* ---- Non-cropping media area ---- */
+    .media-container{
+      height:var(--mediaH-sm);
+      background:#0b0d12;border-bottom:1px solid var(--border);
+      display:flex;align-items:center;justify-content:center;
+    }
+    .media-el{
+      max-width:100%;max-height:100%;
+      object-fit:contain; /* show full image/video without cropping */
+      display:block;
     }
     .card-body{padding:16px 18px 20px}
     .card h3{font-size:1.15rem;margin:2px 0 6px}
@@ -111,9 +113,9 @@
 
     footer{margin-top:60px;text-align:center;color:var(--muted);font-size:.95rem}
 
-    /* ----- Responsive Media Heights (bigger on larger screens) ----- */
-    @media (min-width:720px){ .media{height:var(--media-md)} }
-    @media (min-width:1100px){ .media{height:var(--media-lg)} }
+    /* ----- Responsive media heights ----- */
+    @media (min-width:720px){ .media-container{height:var(--mediaH-md)} }
+    @media (min-width:1100px){ .media-container{height:var(--mediaH-lg)} }
 
     /* ----- Reduced motion ----- */
     @media (prefers-reduced-motion:reduce){
@@ -144,9 +146,11 @@
       <div class="grid">
         <!-- Networking -->
         <article class="card">
-          <img class="media" loading="lazy"
-               src="ccn_project.webp"
-               alt="Complex Packet Tracer topology: routers, switches, servers, and client devices">
+          <div class="media-container">
+            <img class="media-el" loading="lazy"
+                 src="ccn_project.webp"
+                 alt="Complex Packet Tracer topology: routers, switches, servers, and client devices">
+          </div>
           <div class="card-body">
             <h3>Enterprise Networking Topology (Packet Tracer)</h3>
             <p>
@@ -161,9 +165,11 @@
 
         <!-- Diabetes App -->
         <article class="card">
-          <img class="media" loading="lazy"
-               src="Diabetes_prediction_AI.webp"
-               alt="Streamlit-based Diabetes Prediction UI">
+          <div class="media-container">
+            <img class="media-el" loading="lazy"
+                 src="Diabetes_prediction_AI.webp"
+                 alt="Streamlit-based Diabetes Prediction UI">
+          </div>
           <div class="card-body">
             <h3>Diabetes Prediction App (KNN & Naive Bayes)</h3>
             <p>
@@ -177,9 +183,11 @@
 
         <!-- Diabetes UI Variant -->
         <article class="card">
-          <img class="media" loading="lazy"
-               src="Diabetes_prediction_AI_1.webp"
-               alt="Alternative Diabetes App screenshot">
+          <div class="media-container">
+            <img class="media-el" loading="lazy"
+                 src="Diabetes_prediction_AI_1.webp"
+                 alt="Alternative Diabetes App screenshot">
+          </div>
           <div class="card-body">
             <h3>Diabetes App — UI Variant</h3>
             <p>A refined layout variant emphasizing usability and quick parameter sweeps during demos.</p>
@@ -191,10 +199,12 @@
 
         <!-- Big Data Video -->
         <article class="card">
-          <video class="media" controls preload="metadata" poster="Diabetes_prediction_AI.webp">
-            <source src="Big_Data_Project_PS4_Game_Analysis.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
+          <div class="media-container">
+            <video class="media-el" controls preload="metadata" poster="Diabetes_prediction_AI.webp">
+              <source src="Big_Data_Project_PS4_Game_Analysis.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
           <div class="card-body">
             <h3>Big Data Project — PS4 Game Analysis</h3>
             <p>
