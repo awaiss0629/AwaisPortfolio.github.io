@@ -3,113 +3,184 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My Portfolio</title>
+  <title>Awais Ahmad — Portfolio</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #0f1115;
+      --card: #151922;
+      --text: #eaeef6;
+      --muted: #9aa4b2;
+      --accent: #00ffd5;
+      --accent-2: #7cf3ff;
+      --border: #232a36;
+    }
     body {
       font-family: 'Inter', sans-serif;
-      background-color: #121212;
-      color: #f5f5f5;
+      background: radial-gradient(1000px 600px at 20% -10%, rgba(0,255,213,0.05), transparent 60%),
+                  radial-gradient(1000px 600px at 80% 110%, rgba(124,243,255,0.05), transparent 60%),
+                  var(--bg);
+      color: var(--text);
       line-height: 1.6;
-      padding: 40px;
+      padding: 40px 20px 80px;
     }
-    header {
-      text-align: center;
-      margin-bottom: 40px;
-    }
-    header h1 {
-      font-size: 3rem;
-      color: #00ffd5;
-    }
-    header p {
-      font-size: 1.2rem;
-      color: #ccc;
-    }
-    section {
-      margin-bottom: 60px;
-    }
+    .container { max-width: 1100px; margin: 0 auto; }
+    header { text-align: center; margin-bottom: 40px; }
+    header h1 { font-size: clamp(2rem, 4vw, 3rem); color: var(--accent); }
+    header p { font-size: 1.1rem; color: var(--muted); margin-top: 6px; }
+    section { margin: 48px 0; }
     h2 {
-      font-size: 2rem;
-      color: #00ffd5;
-      border-bottom: 2px solid #00ffd5;
-      padding-bottom: 5px;
-      margin-bottom: 20px;
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      color: var(--accent);
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 6px; margin-bottom: 20px;
     }
-    .project {
-      margin-bottom: 20px;
+    #about p { color: var(--text); max-width: 850px; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
     }
-    .project img, .project video {
+    .card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.00));
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+    }
+    .card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(0,255,213,0.35);
+      box-shadow: 0 10px 28px rgba(0,0,0,0.35);
+    }
+    .media {
+      display: block;
       width: 100%;
-      max-width: 600px;
-      border: 1px solid #333;
-      border-radius: 10px;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      background: #0b0d12;
+      border-bottom: 1px solid var(--border);
     }
-    .project a {
-      color: #00ffd5;
-      text-decoration: none;
+    .card-body { padding: 14px 16px 18px; }
+    .card h3 { font-size: 1.05rem; margin-bottom: 6px; }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    .tag {
+      border: 1px solid var(--border);
+      padding: 4px 8px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      color: var(--muted);
     }
-    .contact {
-      font-size: 1rem;
-    }
-    .contact a {
-      color: #00ffd5;
-      text-decoration: none;
-    }
+    .list { list-style: none; }
+    .list li { margin: 8px 0; }
+    a { color: var(--accent-2); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    footer { margin-top: 54px; text-align: center; color: var(--muted); font-size: 0.9rem; }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Talha Ahmad</h1>
-    <p>Game Developer | 3D Artist | Creative Technologist</p>
-  </header>
+  <div class="container">
+    <header>
+      <h1>Awais Ahmad</h1>
+      <p>CS Undergrad • Mobile App Development • Creative Technologist • AI Enthusiast</p>
+    </header>
 
-  <section id="about">
-    <h2>About Me</h2>
-    <p>
-      I am a passionate game developer and 3D artist with a love for creating immersive digital experiences. From coding interactive WebGL games to designing 3D models in Blender, I enjoy every step of the creative process.
-    </p>
-  </section>
+    <section id="about">
+      <h2>About Me</h2>
+      <p>
+        I build clean, user-centric mobile and AI experiences. Recent work spans networking labs,
+        applied ML prototypes, and data engineering/analytics. I enjoy owning the whole flow—from
+        problem framing and data preparation to polished UI.
+      </p>
+    </section>
 
-  <section id="game-dev">
-    <h2>Game Development Projects</h2>
-    <div class="project">
-      <h3>FPS Game</h3>
-      <p><a href="https://your-webgl-game-link.com" target="_blank">Play it here</a></p>
-      <img src="webgl-thumbnail.jpg" alt="WebGL Game Screenshot">
-    </div>
-  </section>
+    <section id="projects">
+      <h2>Projects</h2>
 
-  <section id="blender-projects">
-    <h2>Blender Projects</h2>
-    <div class="project">
-      <h3>3D Bird Model</h3>
-      <img src="character-model.jpg" alt="Blender Project Screenshot">
-    </div>
-    <div class="project">
-      <h3>Animation Video</h3>
-      <video controls>
-        <source src="blender-animation.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
-    </div>
-<div class="project">
-      <h3>3D Perfume Bottle Model</h3>
-      <img src="character-model.jpg" alt="Blender Project Screenshot">
-    </div>
-<div class="project">
-      <h3>3D Chess Piece Model</h3>
-      <img src="character-model.jpg" alt="Blender Project Screenshot">
-    </div>
-  </section>
+      <div class="grid">
+        <article class="card">
+          <img class="media" src="ccn_project.jpeg" alt="Complex Packet Tracer topology: routers, switches, servers, and client devices" />
+          <div class="card-body">
+            <h3>Enterprise Networking Topology (Packet Tracer)</h3>
+            <p>
+              Designed and configured a multi-subnet enterprise lab with routers, multilayer switches,
+              servers, DHCP, VLANs, inter-VLAN routing, and wireless segments.
+            </p>
+            <div class="tags">
+              <span class="tag">Cisco PT</span>
+              <span class="tag">RIP/VLAN</span>
+              <span class="tag">DHCP/DNS/Email</span>
+            </div>
+          </div>
+        </article>
 
-  <section id="contact">
-    <h2>Contact</h2>
-    <div class="contact">
-      <p>Email: <a href="mailto:your.email@example.com">atalha9222@gmail.com</a></p>
-      <p>LinkedIn: <a href="https://linkedin.com/in/yourprofile" target="_blank">https://www.linkedin.com/in/talha-ahmad-196279216?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app</a></p>
-      <p>GitHub: <a href="https://github.com/yourusername" target="_blank">Talha9222</a></p>
-    </div>
-  </section>
+        <article class="card">
+          <img class="media" src="Diabetes_prediction_AI.jpeg" alt="Streamlit-based Diabetes Prediction UI" />
+          <div class="card-body">
+            <h3>Diabetes Prediction App (KNN & Naive Bayes)</h3>
+            <p>
+              Built an interactive ML app to predict diabetes risk using KNN and Naive Bayes.
+              Includes feature inputs and train/test metrics.
+            </p>
+            <div class="tags">
+              <span class="tag">Python</span>
+              <span class="tag">scikit-learn</span>
+              <span class="tag">Streamlit</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <img class="media" src="Diabetes_prediction_AI_1.jpeg" alt="Alternative Diabetes App screenshot" />
+          <div class="card-body">
+            <h3>Diabetes App — UI Variant</h3>
+            <p>
+              A refined layout variant emphasizing usability and quick parameter sweeps during demos.
+            </p>
+            <div class="tags">
+              <span class="tag">UI/UX</span>
+              <span class="tag">Prototyping</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <video class="media" controls preload="metadata">
+            <source src="Big_Data_Project_PS4_Game_Analysis.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <div class="card-body">
+            <h3>Big Data Project — PS4 Game Analysis</h3>
+            <p>
+              Exploratory data analysis and insights on PS4 game datasets (ratings, genres, and sales).
+            </p>
+            <div class="tags">
+              <span class="tag">Pandas</span>
+              <span class="tag">EDA</span>
+              <span class="tag">Visualization</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>Contact</h2>
+      <ul class="list">
+        <li>Email: <a href="mailto:aawais5680@gmail.com">aawais5680@gmail.com</a></li>
+        <li>LinkedIn: <a href="https://www.linkedin.com/in/t-ahmad-196279216" target="_blank" rel="noopener">linkedin.com/in/talha-ahmad-196279216</a></li>
+        <li>GitHub: <a href="https://github.com/Talha9222" target="_blank" rel="noopener">github.com/T9222</a></li>
+      </ul>
+    </section>
+
+    <footer>
+      © <span id="year"></span> Awais Ahmad • All rights reserved.
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
